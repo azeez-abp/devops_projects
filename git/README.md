@@ -391,7 +391,7 @@ Here’s a list of the most commonly used Git commands:
 3. `git commit -m "<message>"` – Commit staged files.
 4. `git status` – View file status.
 5. `git log` – View commit history.
-6. `git branch <branch_name>` – Create a new branch.
+6. `git branch <branch_name> ` ` git branch -M main  – Create a new branch & rename current branch to main .
 7. `git checkout <branch_name>` – Switch branches.
 8. `git merge <branch_name>` – Merge another branch into the current one.
 9. `git push` – Push commits to a remote repository.

@@ -179,8 +179,7 @@
 
 
 
-
-@media (min-width: 0px) and (max-width: 600px) {
+@media (min-width: 0px) and (max-width: 850px) {
   body{
     padding: 15px;
   }
@@ -193,6 +192,64 @@
 }
 
 
+.fgp{
+  display: flex;
+  justify-content: space-between;
+}
+
+.fgp > div:nth-child(1){
+  position: relative;
+
+}
+
+.fgp > div:nth-child(1)>input{
+  position: absolute;
+  opacity: 0;
+/*  visibility: hidden;*/
+  top: -12px;
+  left: 3px;
+  cursor: pointer;
+}
+
+.fgp > div:nth-child(1)>div
+{
+    width: 20px;
+    height: 20px;
+    background: #444;
+    border-radius: 4px;
+    float: right;
+    margin: 4px 9px;
+    position: relative; /*Make the it pseudo element  ot 
+    stay within it whhen page is resize*/
+}
+
+.fgp > div:nth-child(1)>div:before
+{   
+    content: '';
+    width: 14px;
+    height: 7px;
+    background: transparent;
+    display: block;
+    border-bottom: 2px solid #fff;
+    position: absolute;
+    border-left: 2px solid #fff;
+    transform: rotate(-42deg);
+    top: 10%;
+    left: 12%;
+    opacity: 0;
+}
+
+
+.fgp > div:nth-child(1) > input:checked + div:before {
+    opacity: 1;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
 </style>
 </head>
 <body class="high-contrast">
@@ -227,9 +284,17 @@
         </div>
 
 
-         <div class="form-input-wrapper">
+        <div class="form-input-wrapper">
           <label for="Password">Password:</label>
           <input type="password"  name="email" aria-required="true">
+        </div>
+ 
+        <div class="form-input-wrapper fgp">
+           <div>Remeber me 
+            <input type="checkbox" name="remember" class="">
+            <div ></div>
+           </div>
+           <div> <a href="#"> Forget Password?</a></div>
         </div>
         
           <div class="form-input-wrapper">

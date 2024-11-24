@@ -261,11 +261,14 @@ footer{
 
 </style>
 <!-- Making  a change that will cause merge conflict
+  Conflit occurs if their is difference content in a single line (file1->branch-1 & file1->branch2)
   0. add into remote repo
   1. stage intoo local repo with commit 
   2. Ensure local repo (initial) and remote repo(final) has diffence content of the file (git diff)
   4. try to merge (working branch to main)
   5. to know  if a command work locally or remotelyl, switch off your network and see if you can perform the change
+
+
 
   =================================
    git merge work locally, taking the content of the  file from one branch and adding it to the same file on the other branch

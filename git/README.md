@@ -572,6 +572,7 @@ Both rebasing and merging integrate changes from one branch to another, but they
 - **Command:**
   ```bash
   git merge <branch-name>
+  git merger --abort  # reverse merginging
   ```
 
 #### Rebase:
@@ -705,8 +706,10 @@ Git tags are used to mark specific points in the repository's history (often use
 These are intermediate-level Git topics that will help you work more efficiently with version control, collaborate on projects, and keep a clean and organized history. Let me know if you'd like to dive deeper into any specific area!
 
 
-
-
-
-
 # Advance
+
+
+
+
+
+

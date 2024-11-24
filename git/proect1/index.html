@@ -160,24 +160,6 @@
 }
 
 
-.footer div {
-    width: 25%;
-    flex: 25%;
-    height: 42px;
-    font-size: 1.0em;
-    /* padding: 0 23px; */
-    border: 2px solid #fff;
-    border-radius: 9px;
-    line-height: 2.2;
-    margin: 0 2px;
-    text-align: center;
-
-    white-space: nowrap; /* Prevents the text from wrapping */
-    overflow: hidden; /* Hides the overflowing text */
-    text-overflow: ellipsis; /* Adds "..." at the end of the overflowed text */
-}
-
-
 
 @media (min-width: 0px) and (max-width: 850px) {
   body{
@@ -250,6 +232,32 @@ footer{
     left: 0;
     right: 0;
 }
+
+
+.login-page .footer div {
+    width: 25%;
+    flex: 25%;
+    height: 42px;
+    font-size: 1.0em;
+    /* padding: 0 23px; */
+    border: 2px solid #fff;
+    border-radius: 9px;
+    line-height: 2.2;
+    margin: 0 2px;
+    text-align: center;
+
+    white-space: nowrap; /* Prevents the text from wrapping */
+    overflow: hidden; /* Hides the overflowing text */
+    text-overflow: ellipsis; /* Adds "..." at the end of the overflowed text */
+    cursor: pointer;
+}
+
+
+.login-page .footer div:hover {
+   opacity: .6;
+}
+
+
 </style>
 </head>
 <body class="high-contrast">
@@ -269,7 +277,7 @@ footer{
   </section>
   
 
-<section class="body-section">
+<section class="body-section login-page">
     <div class="head">
       <h2>User Login</h2>
       <p>We are committed to building inclusive digital experiences.</p>

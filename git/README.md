@@ -1,7 +1,7 @@
 
 ```English
 An imperative statement is a sentence that gives a command, request, or instruction: 
-They are verb-biginning  sentences 
+They are verb-beginning  sentences 
 "Complete the experiment by Friday", "Wash the dinner plates", "Measure two cups of flour" 
 
 While the imperative statements might read: 

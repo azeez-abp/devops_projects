@@ -777,7 +777,18 @@ Git Flow is a popular branching model that helps to organize your work around fe
 **Commands to Set Up Git Flow:**
 ```bash
 git flow init
+ git push origin release # add the branch to remote
 ```
+
+git flow init
+
+Which branch should be used for bringing forth production releases?
+   - git-feature
+   - main
+   - marys-feature
+Branch name for production releases: [main] main
+
+
 
 ---
 

@@ -23,7 +23,7 @@ IaC encourages and promotes declarative system administration tools over custom 
 ================================================
 # Definition
 # Folder Structure( ```ls .git/**/*```)
-# Architecture (Singule component or multi-component)
+# Architecture (Single component or multi-component)
 # Workflow
 # Operation
 =====================================================

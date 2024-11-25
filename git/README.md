@@ -1,4 +1,24 @@
 
+```English
+An imperative statement is a sentence that gives a command, request, or instruction: 
+They are verb-biginning  sentences 
+"Complete the experiment by Friday", "Wash the dinner plates", "Measure two cups of flour" 
+
+While the imperative statements might read: 
+
+Install an operating system on this machine
+Install these dependencies
+Download code from this URL
+Move the code to this directory
+Do this 3 times for 3 other machines
+
+The declarative version of this would simply read: 4 machines have software from this URL, installed at this directory.
+
+IaC encourages and promotes declarative system administration tools over custom imperative solutions. This led to the emergence of technologies like Docker Containers, Ansible, Terraform, and Kubernetes, which utilize static declarative configuration file
+
+```
+- Declarative software follows a declaration of an expected state
+
 # Git Beginner's Lecture
 ================================================
 # Definition
@@ -20,7 +40,7 @@ Git is a tool used to manage changes in code or documents over time. It allows y
   
 
 ### 2. **Folder structure:**
-- check (git folder structure)[../git_folder_structure.md]
+- check [git folder structure](../git_folder_structure.md)
   
 
 
@@ -101,8 +121,8 @@ Git's architecture is based on a **distributed version control system** (DVCS), 
                v
 +----------------------------------------+
 |                                        |
-|          Remote Git Repository        |
-| (GitHub, GitLab, Bitbucket, etc.)     |
+|          Remote Git Repository         |
+| (GitHub, GitLab, Bitbucket, etc.)      |
 |                                        |
 +----------------------------------------+
 ```
@@ -226,7 +246,13 @@ A **repository** is a project folder where Git tracks the changes. You can eithe
   
   ```bash
   git clone https://github.com/username/repository.git
+  git archive --output=./example_repo_archive.tar --format=tar HEAD
   ```
+
+```bash
+git archive --output=./example_repo_archive.tar.gz --format=tar HEAD ./build
+```
+A partial archives of the repository can be created by passing a path argument. This example adds a ./build path argument to the archive command. This command will output an archive containing only files stored under the ./build directory
 
 ### 4. **Basic Git Commands**
 
@@ -568,11 +594,11 @@ Most collaborative work happens through remote repositories like GitHub, GitLab,
 Both rebasing and merging integrate changes from one branch to another, but they work differently.
 
 #### Merge:
-- **Merge** creates a new commit that combines the histories of two branches.
+- **Merge** creates a `new commit` that `combines the histories` of two branches.
 - **Command:**
   ```bash
   git merge <branch-name>
-  git merger --abort  # reverse merginging
+  git merge --abort  # reverse merginging
   ```
 
 #### Rebase:
@@ -708,8 +734,316 @@ These are intermediate-level Git topics that will help you work more efficiently
 
 # Advance
 
+Great! Now let's dive into **advanced Git** concepts and workflows. These topics will further enhance your understanding of Git, focusing on collaboration, advanced branching, and Git's more powerful features. These will help you manage larger projects, contribute to open-source, and work more efficiently.
+
+### 1. **Advanced Branching Techniques**
+
+Advanced Git branching is useful for managing large teams and complex projects. We'll explore strategies like **Git Flow**, **Feature Branching**, and **Release Management**.
+
+#### **Git Flow Workflow**
+Git Flow is a popular branching model that helps to organize your work around feature development, releases, and hotfixes.
+
+**Key Branches:**
+- **`main`**: This branch always holds the production-ready code.
+- **`develop`**: Integrates all features and is the codebase for the next release.
+- **`feature/*`**: Used for new features, created from `develop`.
+- **`release/*`**: For preparing a new release (final fixes, versioning).
+- **`hotfix/*`**: For quick fixes to production, based on `main`.
+
+**Example Workflow:**
+1. Start a new feature:
+   ```bash
+   git checkout develop
+   git checkout -b feature/new-feature
+   ```
+2. After finishing the feature, merge it back into `develop`:
+   ```bash
+   git checkout develop
+   git merge feature/new-feature
+   ```
+3. Once `develop` is ready for release, create a release branch:
+   ```bash
+   git checkout develop
+   git checkout -b release/1.0.0
+   ```
+4. After preparing the release, merge it into both `main` and `develop`:
+   ```bash
+   git checkout main
+   git merge release/1.0.0
+   git checkout develop
+   git merge release/1.0.0
+   ```
+
+**Commands to Set Up Git Flow:**
+```bash
+git flow init
+```
+
+---
+
+### 2. **Rebasing and Advanced Rebase Techniques**
+
+While we've touched on basic rebasing, it’s worth going deeper into **interactive rebase**, which allows you to clean up commit history and modify it.
+
+#### **Interactive Rebase**
+Interactive rebasing lets you edit commits, reorder them, squash them, and even delete them.
+
+**Start an interactive rebase:**
+```bash
+git rebase -i HEAD~n  # n is the number of commits you want to edit (e.g., HEAD~5)
+```
+
+**What you can do during an interactive rebase:**
+- **Pick**: Keep the commit as is.
+- **Reword**: Change the commit message.
+- **Edit**: Modify the commit content.
+- **Squash**: Combine this commit with the previous one.
+- **Fixup**: Similar to squash, but discards the commit message.
+- **Drop**: Remove the commit.
+
+#### Example Workflow:
+1. Start an interactive rebase:
+   ```bash
+   git rebase -i HEAD~3
+   ```
+2. Change `pick` to `squash` for combining commits.
+3. Edit the commit message and save.
+4. Complete the rebase:
+   ```bash
+   git rebase --continue
+   ```
+
+#### **Rebasing vs Merging:**
+- **Rebasing** rewrites history (linear history, cleaner commits).
+- **Merging** preserves commit history (useful for preserving the context of the branch).
+
+**Note**: **Never rebase public history** that has already been pushed to shared repositories, as it rewrites history.
+
+---
+
+### 3. **Working with Submodules**
+
+Git submodules allow you to include other Git repositories as a subdirectory within your repository. This is useful for managing dependencies or large monorepos.
+
+#### **Key Commands:**
+- **Add a submodule:**
+  ```bash
+  git submodule add <repository-url> <submodule-directory>
+  ```
+
+- **Initialize and clone submodules:**
+  If you clone a repository with submodules:
+  ```bash
+  git submodule init
+  git submodule update
+  ```
+
+- **Update a submodule:**
+  ```bash
+  git submodule update --remote
+  ```
+
+- **Remove a submodule:**
+  ```bash
+  git submodule deinit -f <submodule-directory>
+  git rm <submodule-directory>
+  rm -rf .git/modules/<submodule-directory>
+  ```
+
+Submodules can be tricky, so it’s good to be comfortable with how they work for managing dependencies.
+
+---
+
+### 4. **Git Hooks**
+
+Git hooks allow you to automate tasks at key points during the Git lifecycle (before commits, before pushes, etc.). You can use hooks for tasks like running tests before committing, formatting code, or verifying commit messages.
+
+#### **Common Hooks:**
+- **`pre-commit`**: Runs before a commit is made.
+- **`commit-msg`**: Runs after the commit message is entered but before the commit is finalized.
+- **`pre-push`**: Runs before pushing to a remote repository.
+
+#### Example: Set up a `pre-commit` hook to run linting:
+1. Create a `pre-commit` file in `.git/hooks/` (if it doesn’t exist):
+   ```bash
+   touch .git/hooks/pre-commit
+   chmod +x .git/hooks/pre-commit
+   ```
+
+2. Add a command to lint code before committing:
+   ```bash
+   #!/bin/sh
+   npm run lint  # or your preferred linter
+   ```
+
+3. Now every time you commit, the linter will run.
+
+---
+
+### 5. **Squashing Commits**
+
+Squashing commits is useful to combine multiple small, trivial commits into a single commit. This helps clean up the history, especially before merging to `main` or `develop`.
+
+#### **Squash Commits with Interactive Rebase:**
+- Run interactive rebase:
+  ```bash
+  git rebase -i HEAD~n  # where n is the number of commits you want to squash
+  ```
+
+- Change `pick` to `squash` or `fixup` for the commits you want to combine.
+- Edit the commit message as needed.
+
+---
+
+### 6. **Git Bisect**
+
+Git bisect helps you identify which commit introduced a bug by performing a binary search through your commit history.
+
+#### **Basic Workflow:**
+1. Start bisecting:
+   ```bash
+   git bisect start
+   ```
+
+2. Mark the bad commit (where the bug is present):
+   ```bash
+   git bisect bad
+   ```
+
+3. Mark the good commit (where the bug was not present):
+   ```bash
+   git bisect good <commit-id>
+   ```
+
+4. Git will checkout a commit between the good and bad commits. Test the code.
+5. Continue the bisect process by marking the commit as `good` or `bad`:
+   ```bash
+   git bisect good
+   git bisect bad
+   ```
+
+6. Once you’ve found the commit, end the bisect:
+   ```bash
+   git bisect reset
+   ```
+
+---
+
+### 7. **Git Rebasing with Conflicts**
+
+When rebasing, conflicts might occur. You'll need to resolve them before continuing with the rebase.
+
+#### **Resolving Conflicts:**
+1. Git will pause the rebase and tell you which files have conflicts.
+2. Manually resolve the conflicts in the affected files.
+3. Stage the resolved files:
+   ```bash
+   git add <file-name>
+   ```
+4. Continue the rebase:
+   ```bash
+   git rebase --continue
+   ```
+
+If you decide you want to abort the rebase and revert to the original branch state:
+```bash
+git rebase --abort
+```
+
+---
+
+### 8. **Advanced Git Log**
+
+The `git log` command is an essential tool for viewing commit history, and advanced options allow you to format and filter the log.
+
+#### **Common Log Options:**
+- **Show the commit history in a graph format:**
+  ```bash
+  git log --graph --oneline --all
+  ```
+
+- **Show commits by a specific author:**
+  ```bash
+  git log --author="Author Name"
+  ```
+
+- **Show commits with a specific message pattern:**
+  ```bash
+  git log --grep="bug fix"
+  ```
+
+- **Show commits between two dates:**
+  ```bash
+  git log --after="2024-01-01" --before="2024-11-01"
+  ```
+
+---
+
+### 9. **Git Reflog**
+
+Git’s `reflog` records changes to the tips of branches and allows you to recover lost commits or branches.
+
+#### **Using Reflog to Recover Lost Commits:**
+If you lose a branch or commit, you can view its history with:
+```bash
+git reflog
+```
+
+Then, find the commit ID and checkout the lost commit:
+```bash
+git checkout <commit-id>
+```
+
+You can even create a new branch from the lost commit:
+```bash
+git checkout -b new-branch <commit-id>
+```
+
+---
+
+### Conclusion
+
+Advanced Git gives you the tools to manage complex projects, work with large teams, and maintain a clean and organized history. By mastering features like **rebasing**, **submodules**, **hooks**, and **bisecting**, you can handle nearly any Git-related challenge. Let me know if you'd like to explore any of these topics further!
+ 
 
 
+ # PR MR TEMPLATE
 
+ ## Pull Request Title
+Provide a concise title summarizing the changes. For example, "Implement search functionality for homepage".
+[branch_name] version(build bunber)  e.g.[Realease]1.2.3(4)
+## Description
+Explain the purpose of this pull request, including:
+- The problem it solves or the feature it introduces.
+- Relevant issue numbers or links to existing discussions.
 
+## Type of Change
+Please mark the relevant option(s):
+- [x] Bug fix (fixes a reported issue or defect)  this iswhat i did
+- [ ] New feature (adds new functionality without breaking existing features)
+- [ ] Breaking change (modifies existing functionality, potentially causing incompatibility)
+- [ ] Documentation update (improves or updates project documentation)
 
+## How Has This Been Tested?
+Detail your testing approach, including:
+- Steps to reproduce or validate the changes.
+- Testing environments (e.g., OS, browsers, frameworks).
+- Tests conducted (manual, unit, integration, etc.).
+
+## Checklist
+Please ensure all items are checked before submitting:
+- [ ] I have read and followed the [CONTRIBUTING](LINK_TO_CONTRIBUTING.MD) guidelines.
+- [ ] My code adheres to the project’s code style and conventions.
+- [ ] I have added or updated tests to cover my changes.
+- [ ] My changes do not introduce any breaking functionality.
+- [ ] Documentation has been updated to reflect these changes (if needed).
+- [ ] I have added relevant comments to the code, particularly for complex logic.
+
+## Screenshots or Visuals
+Include screenshots or videos that explain the changes, if applicable.
+
+## Additional Notes
+Provide any further information about this pull request, such as:
+- Required deployment changes or migrations.
+- New dependencies introduced.
+- Known issues or limitations.

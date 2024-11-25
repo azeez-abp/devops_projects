@@ -258,6 +258,9 @@ footer{
    opacity: .6;
 }
 
+.hide{
+  display: none;
+}
 
 </style>
 <!-- Making  a change that will cause merge conflict
@@ -321,7 +324,7 @@ footer{
         
           <div class="form-input-wrapper">
              <div class="loader">
-                  <button type="button">Submit <div class="spin"></div> </button>
+                  <button type="button" class="send">Submit <div class="spin hide"></div> </button>
                   
              </div>
            
@@ -343,5 +346,13 @@ footer{
   <footer>
     <p class="text-center"> &copy; 2024 Accessible Web Inc.</p>
   </footer>
+
+  <script type="text/javascript">
+    const  login = (e)=>{
+      console.log(e)
+    }
+    document.querySelector(".send").addEventListener("click", login)
+  </script>
 </body>
 </html>
+

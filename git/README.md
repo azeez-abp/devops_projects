@@ -789,6 +789,22 @@ Which branch should be used for bringing forth production releases?
 Branch name for production releases: [main] main
 
 
+Which branch should be used for integration of the "next release"?
+   - git-feature
+   - marys-feature
+   - release
+Branch name for "next release" development: [] release
+
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? [] v
+Hooks and filters directory? [C:/Users/Adeyori/Desktop/prog/devops_project/.git/hooks]
+
+
 
 ---
 

@@ -202,7 +202,7 @@
     border-radius: 4px;
     float: right;
     margin: 4px 9px;
-    position: relative; /*Make the it pseudo element  ot 
+    position: relative; /*Make the it pseudo element  
     stay within it whhen page is resize*/
 }
 
@@ -258,10 +258,36 @@ footer{
    opacity: .6;
 }
 
-.hide{
-  display: none;
+.disabled{
+    opacity: 0.5;
+    pointer-events: none;
 }
 
+.pass-policy{
+   color: #0f8;
+   position: relative;
+
+}
+
+.pass-policy:before{   
+    content: '';
+    width: 14px;
+    height: 7px;
+    background: transparent;
+    display: block;
+    border-bottom: 2px solid #fff;
+    position: absolute;
+    border-left: 2px solid #fff;
+    transform: rotate(-42deg);
+    top: 10%;
+    right: 32%;
+    opacity: 0;
+}
+.show:before{
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
 </style>
 <!-- Making  a change that will cause merge conflict
   Conflit occurs if their is difference content in a single line (file1->branch-1 & file1->branch2)
@@ -277,7 +303,7 @@ footer{
    git merge work locally, taking the content of the  file from one branch and adding it to the same file on the other branch
   -->
 </head>
-<body class="high-contrast">
+<body class="high-contrast" >
 
   <section class="header-section">
      <header class="header">
@@ -294,7 +320,7 @@ footer{
   </section>
   
 
-<section class="body-section login-page">
+<section class="body-section login-page" >
     <div class="head">
       <h2>User Login</h2>
       <p>We are committed to building inclusive digital experiences.</p>
@@ -312,6 +338,12 @@ footer{
         <div class="form-input-wrapper">
           <label for="Password">Password:</label>
           <input type="password"  name="email" aria-required="true">
+           <p >Must include one uppercase letter</p>
+           <p>Must include one lowercase letter</p>
+           <p>Must include one number</p>
+           <p>Must include one special character</p>
+           <p>Must be atlease 6 charcter in length</p>
+
         </div>
  
         <div class="form-input-wrapper fgp">
@@ -324,7 +356,7 @@ footer{
         
           <div class="form-input-wrapper">
              <div class="loader">
-                  <button type="button" class="send">Submit <div class="spin hide"></div> </button>
+                  <button type="button" class="send">Submit <div ></div> </button>
                   
              </div>
            
@@ -333,7 +365,7 @@ footer{
   </div>
 
 
-   <div class="footer">
+   <div class="footer" >
       <div class="other-login">Google</div>
       <div class="other-login">Facebook</div>
       <div class="other-login">Tiktok</div>
@@ -343,15 +375,74 @@ footer{
 </section>
 
 
-  <footer>
+  <footer >
     <p class="text-center"> &copy; 2024 Accessible Web Inc.</p>
   </footer>
 
   <script type="text/javascript">
+
+    document.querySelector("input[type*='pass']").addEventListener("input", (e)=>{
+        const allPolicy = e.target.parentElement.querySelectorAll("p")
+       
+        if (new RegExp(/[A-Z]/).exec(e.target.value)){
+            allPolicy[0].classList.add(...["show" ,"pass-policy"])
+        }else{
+             allPolicy[0].classList.remove(...["show", "pass-policy"])
+        }
+
+        if (new RegExp(/[a-z]/).exec(e.target.value)){
+            allPolicy[1].classList.add(...["show" ,"pass-policy"])
+        }else{
+             allPolicy[1].classList.remove(...["show", "pass-policy"])
+        }
+
+        if (new RegExp(/[0-9]/).exec(e.target.value)){
+            allPolicy[2].classList.add(...["show" ,"pass-policy"])
+        }else{
+             allPolicy[2].classList.remove(...["show", "pass-policy"])
+        }
+
+        if (new RegExp(/[!@#$%^&*]/).exec(e.target.value)){
+            allPolicy[3].classList.add(...["show" ,"pass-policy"])
+        }else{
+             allPolicy[3].classList.remove(...["show", "pass-policy"])
+        }
+
+          if (e.target.value.length > 6){
+            allPolicy[4].classList.add(...["show" ,"pass-policy"])
+        }else{
+             allPolicy[4].classList.remove(...["show", "pass-policy"])
+        }
+    })
+
+
     const  login = (e)=>{
-      console.log(e)
+      
+    
+      if(e.target.classList.contains('send')){  
+       const allInputs = e.currentTarget.querySelectorAll("input")
+       const spinner = e.target.children[0].classList
+         spinner.add('spin')
+         e.target.classList.add("disabled")
+          Array.from(allInputs).forEach((input)=>{
+              if (!input.value) {
+                 const inputPrev = input.previousElementSibling
+                 let previousTxt = inputPrev.innerText
+                 inputPrev.style.color = "#f66"
+                 inputPrev.innerText = previousTxt + ' is Required'
+                 setTimeout(()=>{
+                   inputPrev.innerText = previousTxt 
+                   spinner.remove("spin")
+                   inputPrev.removeAttribute("style")
+                   e.target.classList.remove("disabled")
+               },3000)
+              }
+          })
+         console.log(e, e.currentTarget, allInputs)
+      }
     }
-    document.querySelector(".send").addEventListener("click", login)
+
+    document.querySelector(".login-page").addEventListener("click", login)
   </script>
 </body>
 </html>

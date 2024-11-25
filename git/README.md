@@ -12,9 +12,13 @@ Download code from this URL
 Move the code to this directory
 Do this 3 times for 3 other machines
 
+There are two major important thing about imperative commands
+1. Filtering 
+2. Formating output
+
 The declarative version of this would simply read: 4 machines have software from this URL, installed at this directory.
 
-IaC encourages and promotes declarative system administration tools over custom imperative solutions. This led to the emergence of technologies like Docker Containers, Ansible, Terraform, and Kubernetes, which utilize static declarative configuration file
+IaC eqncourages and promotes declarative system administration tools over custom imperative solutions. This led to the emergence of technologies like Docker Containers, Ansible, Terraform, and Kubernetes, which utilize static declarative configuration file
 
 ```
 - Declarative software follows a declaration of an expected state
@@ -1074,3 +1078,18 @@ Provide any further information about this pull request, such as:
 - Required deployment changes or migrations.
 - New dependencies introduced.
 - Known issues or limitations.
+
+
+
+# Formatting log output  & Filtering
+## git log
+- intended for creating release announcements
+- It groups each commit by author and displays the first line of each commit message
+```bash
+git log --oneline --decorate --stat
+```
+## git shortlog
+
+```bash
+git shortlog
+```

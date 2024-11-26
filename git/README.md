@@ -1111,6 +1111,8 @@ git push origin --tags             # Push tags
 git branch -d release/v1.0.0       # Delete local release branch
 git push origin --delete release/v1.0.0  # Delete remote release branch
 
+
+Feature --> develop --> release --> tags
 ```
 
 

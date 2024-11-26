@@ -1097,10 +1097,10 @@ git shortlog
 
 ```bash
 git checkout develop               # Ensure you're on the develop branch
-git checkout -b release/v1.0.0     # Create release branch (optional)
+git checkout -b release/v1.0.1     # Create release branch (optional)
 git add .                          # Add changes (if any)
-git commit -m "Release v1.0.0"     # Commit changes
-git tag -a v1.0.0 -m "Release v1.0.0"  # Create a tag
+git commit -m "Release v1.0.1"     # Commit changes
+git tag -a v1.0.0 -m "Release v1.0.1"  # Create a tag
 git checkout main                  # Switch to main branch
 git merge release/v1.0.0           # Merge release branch into main
 git checkout develop               # Switch to develop branch
@@ -1109,10 +1109,26 @@ git push origin main               # Push main branch
 git push origin develop            # Push develop branch
 git push origin --tags             # Push tags
 git branch -d release/v1.0.0       # Delete local release branch
-git push origin --delete release/v1.0.0  # Delete remote release branch
+git push origin --delete release/v1.0.1  # Delete remote release branch
 
 
 Feature --> develop --> release --> tags
+
+
+
+
+Create a feature --->add workto it --> merge the feature it to develop branch 
+create release branch git checkout -b release/v1.0.1 --> add the work to it
+Create tag  git tag -a v1.0.0 -m "Release v1.0.1"
+checkout main git checkout main  
+merge develop in to it; git merge release/v1.0.1
+checkout develop git checkout develop 
+merge develop in to it; git merge release/v1.0.1
+git push origin main               # Push main branch
+git push origin develop            # Push develop branch
+git push origin --tags 
+git push origin --delete release/v1.0.1
+git flow release publish v1.0.1
 ```
 
 
@@ -1241,5 +1257,34 @@ Let me know if you need more details on any part of the Git Flow process!
 
 git flow release start 1.0.0
 Fatal: There is an existing release branch '1.0.0'. Finish that one first.
-
+git commit -a (open a file for commit mesage entry)
 git branch -a
+git status
+
+
+git clean -fd
+
+! [remote rejected] release/v1.0.1 -> release/v1.0.1 (cannot lock ref 'refs/heads/release/v1.0.1': 'refs/heads/release' exists; cannot create 'refs/heads/release/v1.0.1')
+error: failed to push some refs to 'github.com:azeez-abp/devops_projects.git'
+
+git branch -m release release-old
+or
+git push origin --delete release
+git push origin release/v1.0.1
+
+
+git branch -D release/v1.0.1
+Create the branch again:
+git flow release start v1.0.1
+git push origin release/v1.0.1
+git flow release publish v1.0.1
+
+
+
+
+
+
+
+
+
+

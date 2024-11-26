@@ -1275,6 +1275,9 @@ git push origin release/v1.0.1
 
 git branch -D release/v1.0.1
 Create the branch again:
+
+Basically
+
 git flow release start v1.0.1
 git push origin release/v1.0.1
 git flow release publish v1.0.1
